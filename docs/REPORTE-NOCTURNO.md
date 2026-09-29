@@ -12,7 +12,7 @@ Diario de todo lo que ha hecho el equipo de agentes mientras dormías. Empieza p
 | **modelduel** | Python 3.12 | [#1 builder](https://github.com/BertMarti/modelduel/pull/1) → [#2 qa](https://github.com/BertMarti/modelduel/pull/2) → [#3 docs](https://github.com/BertMarti/modelduel/pull/3) | 132 (94 % cobertura) | https://bertmarti.github.io/modelduel/ (demo en `/demo/`) | [modelduel.pdf](proyectos/modelduel.pdf) |
 | **commitling** | Go 1.27 + GitHub Action | [#1 builder](https://github.com/BertMarti/commitling/pull/1) → [#2 qa](https://github.com/BertMarti/commitling/pull/2) → [#3 docs](https://github.com/BertMarti/commitling/pull/3) | ✓ (Ubuntu, Windows y prueba de la Action) | https://bertmarti.github.io/commitling/ | [commitling.pdf](proyectos/commitling.pdf) |
 
-Capturas de las tres en [`capturas/`](capturas/). Trabajo terminado sobre la **01:20**, muy antes de las 8:00.
+Capturas de las tres en [`capturas/`](capturas/). Trabajo terminado sobre la **01:00**, muy antes de las 8:00.
 
 ### Qué tienes que hacer tú (en este orden)
 
