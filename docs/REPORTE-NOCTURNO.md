@@ -167,3 +167,13 @@ Si algún PR no se ha reorientado a `main` (lo verás porque falla el merge), c�
 - Plantilla de PR corregida en los 3 repos (`opencode-docs` → `docs`). CI de los 3 PR de docs en verde tras el cambio.
 - PDF finales regenerados desde el código final (`agent/docs`) con capturas: printquote (44 págs.), modelduel (46) y commitling (46), en `docs/proyectos/`.
 - Todo este material (reporte, PDFs, capturas y la guía general `Guia-Proyectos-con-IA.pdf`) se sube a `curso_ia_MoureDev` en la rama `docs/reporte-nocturno` con su PR.
+
+## Publicación (mañana del 30/09)
+- Alberto fusionó los PR. En printquote, al fusionar #2 (que ya contenía #1) GitHub cerró #3 porque su rama base se borró; el lead reabrió su contenido como [#4](https://github.com/BertMarti/printquote/pull/4) y cambió la base de todos los PR pendientes a `main` para que no se repitiera.
+- Fusionados: printquote #1, #2 y #4; modelduel #1, #2 y #3; commitling #1, #2 y #3. Despliegues en Pages correctos.
+- **Webs publicadas y comprobadas:**
+  - https://bertmarti.github.io/printquote/#ejemplo (pieza de ejemplo: 1,59 €)
+  - https://bertmarti.github.io/modelduel/demo/
+  - https://bertmarti.github.io/commitling/ (con `live/BertMarti.svg`)
+- Repositorios locales sincronizados con `main` y ramas de agente borradas.
+- Lección para la próxima vez: los PR encadenados deben apuntar todos a `main` desde el principio.
