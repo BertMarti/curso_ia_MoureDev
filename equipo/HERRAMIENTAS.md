@@ -53,3 +53,7 @@ No se usa en esta fase: funciona con un hook de parada de la sesión principal y
 - `MEMORY.md` actualizado en cada PR. Nunca fusiones, ni borres ramas remotas, ni crees etiquetas o releases.
 - Empuja tras cada commit en verde (hay límites de uso: que nada se pierda si hay un corte).
 - Cierra los procesos que arranques (servidores de desarrollo, `http.server`) antes de terminar.
+
+## Go en este PC (importante)
+
+El Control de aplicaciones de Windows (Smart App Control) bloquea y notifica cada binario de test de Go sin firmar (`*.test.exe`). **No ejecutes `go test` ni `go run` en local.** Verifica en local solo con `gofmt -l .`, `go vet ./...` y `go build ./...` (compilar no dispara el aviso), y deja la ejecución de tests al CI de GitHub (`gh pr checks --watch`, `gh run view --log-failed`). Los tests del wasm pueden ejecutarse con `node`.
