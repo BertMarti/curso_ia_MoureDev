@@ -57,3 +57,7 @@ No se usa en esta fase: funciona con un hook de parada de la sesión principal y
 ## Go en este PC (importante)
 
 El Control de aplicaciones de Windows (Smart App Control) bloquea y notifica cada binario de test de Go sin firmar (`*.test.exe`). **No ejecutes `go test` ni `go run` en local.** Verifica en local solo con `gofmt -l .`, `go vet ./...` y `go build ./...` (compilar no dispara el aviso), y deja la ejecución de tests al CI de GitHub (`gh pr checks --watch`, `gh run view --log-failed`). Los tests del wasm pueden ejecutarse con `node`.
+
+## Lecciones de la fase v0.6
+- **Temporales:** cada agente trabaja en su propia subcarpeta del scratchpad (`scratchpad/<agente>/`) y **nunca borra con globs** fuera de ella.
+- **OpenCode (`opencode run` no interactivo):** lánzalo siempre desde dentro de un repo git y solo con tareas cortas de un archivo. Fuera de git, o con tareas de varios archivos, se cuelga sin salida. Pon siempre `timeout`.
