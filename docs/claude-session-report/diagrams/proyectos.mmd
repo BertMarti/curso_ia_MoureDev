@@ -1,0 +1,18 @@
+flowchart LR
+  subgraph P1["printquote · TypeScript + Vite + three.js"]
+    direction TB
+    A1[STL / OBJ / 3MF<br/>en Web Worker] --> A2[Geometría y avisos] --> A3[Modelo de coste] --> A4[Visor · PDF · historial<br/>PWA · demo guiada]
+  end
+  subgraph P2["modelduel · Python 3.12 stdlib"]
+    direction TB
+    B1[Tareas + tests] --> B2[Proveedores<br/>replay · gemini · openai · omniroute] --> B3[Runner aislado<br/>+ pytest] --> B4[Informe · liga<br/>clasificación · duelo en directo]
+  end
+  subgraph P3["commitling · Go 1.27 + WebAssembly"]
+    direction TB
+    C1[Eventos públicos<br/>de GitHub] --> C2[Estadísticas] --> C3[Criatura<br/>render SVG] --> C4[Action · galería<br/>generador wasm · demo]
+  end
+  A4 --> PAGES[(GitHub Pages)]
+  B4 --> PAGES
+  C4 --> PAGES
+  C4 == "Action @v1" ==> PERFIL[(Perfil<br/>BertMarti/BertMarti)]
+  B2 -. "API compatible OpenAI" .-> OMNI[(OmniRoute<br/>localhost:20128)]

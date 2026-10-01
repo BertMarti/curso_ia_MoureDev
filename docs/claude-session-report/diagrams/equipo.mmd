@@ -1,0 +1,11 @@
+flowchart TB
+  LEAD["TEAM LEAD<br/>Claude Code · Opus"]
+  LEAD --> P1["agent-project-1<br/>printquote · Sonnet"]
+  LEAD --> P2["agent-project-2<br/>modelduel · Sonnet"]
+  LEAD --> P3["agent-project-3<br/>commitling · Sonnet"]
+  LEAD --> REV["agent-review<br/>agent-skills:code-reviewer"]
+  LEAD --> OC["OpenCode workers<br/>opencode run"]
+  OC --> GEM["Gemini<br/>gemini-3.8-flash · 3.1-pro ✗ cuota"]
+  OC --> FREE["Modelos Free<br/>muse-spark · mimo · nemotron"]
+  OC -.-> NO["OpenAI / ChatGPT<br/>PROHIBIDO · no usado"]
+  style NO stroke-dasharray: 5 5,color:#999
