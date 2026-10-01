@@ -2,13 +2,13 @@
 
 # 1. Executive Summary
 
-Durante esta sesión un equipo multiagente coordinado por Claude Code ha llevado los tres proyectos de la v0.2 a la **v0.5.0**, con dos fases visibles para la persona usuaria: la versión «Pro» (v0.4) y la versión con **estética profesional y modo demo en tiempo real** (v0.5).
+Durante esta sesión un equipo multiagente coordinado por Claude Code ha llevado los tres proyectos de la v0.2 a la **v0.6.0**, con tres fases visibles para la persona usuaria: la versión «Pro» (v0.4), la versión con **estética profesional y modo demo en tiempo real** (v0.5) y la versión con **una función de producto por app y la deuda saldada** (v0.6, §18).
 
-| Proyecto | Versión publicada | Web | Novedad estrella de la v0.5 |
-|---|---|---|---|
-| printquote | [v0.5.0](https://github.com/BertMarti/printquote/releases/tag/v0.5.0) | https://bertmarti.github.io/printquote/ | «Ver demo»: recorrido guiado de ~13 s con el total recalculándose en vivo |
-| modelduel | etiqueta v0.5.0 (la release dispara PyPI, pendiente) | https://bertmarti.github.io/modelduel/#demo | «Duelo en directo»: reproduce un duelo grabado con código, tests y marcador en tiempo real |
-| commitling | [v0.5.0](https://github.com/BertMarti/commitling/releases/tag/v0.5.0) + `v1` | https://bertmarti.github.io/commitling/ | «Míralo crecer»: timelapse de 90 días con WebAssembly, sin llamar a GitHub |
+| Proyecto | Versión publicada | Web | Novedad de la v0.5 | Novedad de la v0.6 |
+|---|---|---|---|---|
+| printquote | [v0.6.0](https://github.com/BertMarti/printquote/releases/tag/v0.6.0) | https://bertmarti.github.io/printquote/ | «Ver demo»: recorrido guiado de ~13 s con el total recalculándose en vivo | Presupuesto por lotes (varias piezas, PDF multipágina, CSV) |
+| modelduel | etiqueta v0.6.0 (la release dispara PyPI, pendiente) | https://bertmarti.github.io/modelduel/#demo | «Duelo en directo»: reproduce un duelo grabado con código, tests y marcador en tiempo real | Informe en Markdown seguro para pegar en GitHub |
+| commitling | [v0.6.0](https://github.com/BertMarti/commitling/releases/tag/v0.6.0) + `v1` | https://bertmarti.github.io/commitling/ | «Míralo crecer»: timelapse de 90 días con WebAssembly, sin llamar a GitHub | Tarjeta compacta 200x60 y sin desborde a 320 px |
 
 - Los tres repositorios terminan con `main` en verde (CI y despliegue en GitHub Pages).
 - Todo cambio entró por pull request y pasó por un agente revisor. Las revisiones bloquearon y corrigieron **5 fallos reales** antes de publicar:
@@ -218,11 +218,13 @@ No hay dependencias de código entre ellos. Las de integración son:
 
 # 15. Riesgos y deuda técnica real
 
-- **commitling:** a 320 px el documento mide 338 px. El mínimo documentado es 360 px.
-- **modelduel:** las capturas del duelo en directo son anteriores a la corrección del texto del veredicto.
+- ~~commitling: a 320 px el documento mide 338 px~~ → resuelto en v0.6 (medido 320 px en la web publicada).
+- ~~modelduel: capturas del duelo en directo obsoletas~~ → regeneradas en v0.6.
+- ~~Tests de commitling que comparan cadenas exactas de CSS~~ → sustituidos por tests de intención en v0.6.
+- **printquote:** el lote vive en memoria (no sobrevive a recargar) y un lote guardado en el historial no se puede reabrir (no se guarda la geometría).
+- **printquote, documentación:** el CHANGELOG de la v0.6 dice que `og.png` muestra el bloque del lote y no lo muestra; el README aún dice «una página A4». Retoques opcionales sin aplicar (§18).
 - **Sin probar** en móvil real, con lector de pantalla real ni con la PWA instalada.
 - **Sin probar contra servicios reales:** `gemini`, `openai` y `omniroute` en modelduel solo se han probado con respuestas simuladas.
-- **Tests de commitling** que comparan cadenas exactas de CSS: frágiles ante reformateos.
 
 # 16. Trabajo pendiente
 
@@ -230,15 +232,57 @@ No hay dependencias de código entre ellos. Las de integración son:
 2. **PyPI (modelduel).** Configurar el *pending publisher* y el environment `pypi`, crear la release, y luego cerrar #18 y #19.
 3. **OmniRoute.** Conectar al menos un proveedor gratuito para hacer duelos reales.
 4. **Context7.** Autorizar el MCP con `/mcp` para usarlo de forma nativa.
-5. **Correcciones menores.** Arreglar el desborde de commitling a 320 px y regenerar las capturas del duelo en directo.
+5. **Retoques de printquote v0.6** (decisión de Alberto, §18): documentación del lote, anuncio de «Lote lleno», etiqueta accesible del lote guardado.
+6. **Probar la v0.6 a mano:** un lote de 3 piezas en printquote, pegar un `informe.md` de modelduel en un issue de prueba y poner `size: compact` en el perfil.
 
 # 17. Estado final de cada proyecto
 
 | Proyecto | Versión | `main` | Web |
 |---|---|---|---|
-| printquote | v0.5.0 (release) | CI y despliegue en verde | Demo «Ver demo» publicada |
-| modelduel | v0.5.0 (etiqueta) | CI (4 jobs) y despliegue en verde | Duelo en directo publicado en `#demo` |
-| commitling | v0.5.0 (release) + `v1` | CI, Action y despliegue en verde | «Míralo crecer» publicado |
+| printquote | v0.6.0 (release) | CI y despliegue en verde | «Ver demo» y bloque «06 Lote» publicados |
+| modelduel | v0.6.0 (etiqueta) | CI (4 jobs) y despliegue en verde | Duelo en directo y `og:image` publicados |
+| commitling | v0.6.0 (release) + `v1` | CI, Action y despliegue en verde | «Míralo crecer» y tarjeta compacta publicados |
+
+# 18. Fase v0.6.0
+
+Plan: una función de producto por app, saldar la deuda de §15 y una auditoría de rendimiento medida de las tres webs como entrada para el pulido. Mismo flujo: issues en el hito, una rama y un PR por issue, revisión por `agent-skills:code-reviewer`, fusión y publicación por el lead. Traza completa en `evidence/traza-fase6.md`.
+
+## Auditoría de rendimiento (agent-skills:web-performance-auditor)
+
+Medida con Chrome sin interfaz (móvil Slow-4G con CPU x4 y escritorio) y curl. Las tres tienen CLS 0, ninguna fuente web y ningún script que bloquee. Detalle en `evidence/auditoria-rendimiento-v06.md`.
+
+| Web | Carga inicial (gz) | FCP / LCP móvil | Acción aplicada |
+|---|---|---|---|
+| printquote | 185,9 KB | 748-824 ms | El service worker ya no vuelve a descargar los `assets/*` con hash: −177 KB en la primera visita |
+| modelduel | 13,0 KB | 904 ms | Nada de rendimiento; se añadió `og:image` y `twitter:card` |
+| commitling | 17,6 KB | 588 / 736 ms | El wasm empieza con `pointerdown` y se pide en paralelo con `wasm_exec.js` (≈−176 ms en Slow-4G); la criatura en vivo es diferida |
+
+Descartado con motivo: precalentar el PDF de printquote, porque costaría ≈620 KB a quien nunca lo pida.
+
+## Trabajo por proyecto
+
+| Proyecto | PRs | Qué entró | Revisión |
+|---|---|---|---|
+| printquote | #44, #45, #47, #48, #49 | Lote de hasta 50 piezas que reutiliza `computeQuote` (sin fórmulas duplicadas), con IVA una vez sobre la suma; «Copiar lote» y «PDF del lote» multipágina; lote en el historial y CSV por pieza con protección contra fórmulas; service worker; `og.png` y captura; 454 tests | Aprobados sin bloqueantes. Verificado: dinero coherente en texto, PDF y CSV; XSS por nombre de archivo; historial corrupto; offline en Chrome real |
+| modelduel | #42, #43, #45, #46 | `--format html,md` y `informe.md` con `md_text` como único camino de los datos; U+200B tras `@`, `#`, `GH-` y en SHA; `og.png`; capturas del directo; cobertura 96,47 % | **2 bloqueantes** corregidos antes de fusionar: `GH-1` y los SHA se seguían enlazando en GitHub; `informe.md` quedaba a 0 bytes si fallaba el render |
+| commitling | #41, #42, #43, #44, #46 | `size: compact` (200x60) en la Action, la CLI, el wasm, la galería y el generador; huellas SHA-256 de las 96 tarjetas de v0.5.0; desborde 338→320 px; tests de CSS por intención; arranque del wasm más temprano | **1 bloqueante** corregido: el salto de la compacta usaba los 8 px de la grande y podía recortar la cabeza |
+
+![printquote v0.6: lote de tres piezas](assets/printquote-v06-lote.png)
+
+![commitling v0.6: tarjeta compacta en la galería](assets/commitling-v06.png)
+
+## Verificación del lead
+
+- **commitling:** leí el diff del arreglo del salto y del fallback de `instantiate()`. En la web publicada, a 320 px `scrollWidth` es 320. Los SVG compactos responden 200. Release v0.6.0 publicada y `v1` movida: `action.yml` solo añade `size`, con valor por defecto `full`.
+- **modelduel:** el mismo texto hostil (`GH-1`, SHA, `@usuario`, `#1`, `<img>`, enlaces, `www.`) da 11 enlaces e imágenes al renderizarlo sin escapar con la API de Markdown de GitHub, y 0 tras `md_text`. Etiqueta v0.6.0 creada. No disparó ningún workflow de PyPI. `og.png` publicado (200, 29 KB).
+- **printquote:** a 320 px `scrollWidth` es 320 y el bloque del lote está presente. Release v0.6.0.
+
+## Incidencias de la fase
+
+- **Límite de uso de Claude:** cortó a tres agentes a mitad de trabajo. Se reanudaron con su contexto y sin perder trabajo.
+- **Clasificador del modo automático:** bloqueó, sin dar motivo, el envío de los retoques opcionales al agente de printquote. No se buscó otra vía; queda para Alberto (§16).
+- **Limpieza de un revisor:** borró con globs temporales del scratchpad que no eran suyos, entre ellos el generador de los PDF de proyecto. No afectó a ningún repo. Desde ahora, cada agente usa su propia subcarpeta del scratchpad.
+- **OpenCode:** ver la tabla de abajo. `opencode run` solo es fiable en tareas cortas, dentro de un repo git.
 
 # OpenCode Usage
 
@@ -256,17 +300,24 @@ No hay dependencias de código entre ellos. Las de integración son:
 | 10 | commitling | Segunda opinión del diff v0.5 | OpenCode Free | `opencode/nemotron-3-ultra-free` | Fallo: salida vacía | → #11 |
 | 11 | commitling | Segunda opinión del diff v0.5 | OpenCode Free | `opencode/mimo-v2.6-flash-free` | Fallo: tiempo agotado | Abandonada (había revisión de Claude) |
 | 12 | modelduel | Segunda opinión de `demo.js` | Google | `google/gemini-3.7-flash` | Fallo: tiempo agotado | Abandonada (había revisión de Claude) |
+| 13 | curso | Revisar `COMO-PROBAR.md` contra los CHANGELOG (v0.6) | OpenCode Free | `opencode/nemotron-3-ultra-free` | Fallo: tiempo agotado (leía fuera del repo) | → #14 |
+| 14 | curso | Lo mismo, lanzado desde `D:\Desarrollos` | OpenCode Free | `opencode/mimo-v2.6-flash-free` | Fallo: tiempo agotado | → #15 y #16 (diagnóstico) |
+| 15 | curso | Humo: «Responde OK» | OpenCode Free | `opencode/mimo-v2.6-flash-free` | OK | — |
+| 16 | curso | Humo: leer la primera línea de un archivo dentro del repo | OpenCode Free | `opencode/mimo-v2.6-flash-free` | OK | — |
+| 17 | curso | Lo mismo que #13, desde una carpeta sin git (y su humo) | OpenCode Free | `opencode/mimo-v2.6-flash-free` | Fallo ×2: se cuelga fuera de git | → #18 |
+| 18 | curso | Lo mismo que #13, desde el repo con copias de los CHANGELOG | OpenCode Free | `opencode/mimo-v2.6-flash-free` | Fallo: tiempo agotado | Abandonada; la guía la actualizó el lead |
 
 ## Model Failovers
 
 - **`gemini-3.1-pro-preview` → `muse-spark-1.3-contributor-free`:** cuota del plan gratuito igual a 0. La auditoría se completó.
 - **`gemini-3.8-flash` → `mimo-v2.6-flash-free`:** límite de 5 peticiones por minuto agotado tras dos lecturas. La auditoría se completó.
 - **`nemotron-3-ultra-free` → `mimo-v2.6-flash-free` → abandono:** con un diff grande adjunto con `-f`, el primero devolvió salida vacía y el segundo agotó el tiempo. Se mantuvo la revisión de Claude.
+- **`nemotron-3-ultra-free` → `mimo-v2.6-flash-free` → abandono (v0.6):** la revisión de `COMO-PROBAR.md` agotó el tiempo en todos los intentos. Diagnóstico: fuera de un repo git, `opencode run` se cuelga incluso con una tarea mínima; dentro funciona con tareas cortas de un archivo y se cuelga con tareas de varios archivos.
 
 ## Auditoría de proveedores
 
 - **Google / Gemini:** utilizado. 1 ejecución correcta; 3 fallidas (cuota, límite por minuto y tiempo agotado).
-- **OpenCode Free:** utilizado. 5 ejecuciones correctas y 2 fallidas.
+- **OpenCode Free:** utilizado. 7 ejecuciones correctas y 7 fallidas.
 - **OpenAI / ChatGPT:** **NO UTILIZADO en esta fase** (01/10, desde que se prohibió). Hubo **una** ejecución anterior, la #2 del 30/09, con `openai/gpt-5.6-terra`, cuando Alberto había autorizado expresamente usar ChatGPT desde OpenCode. Se declara aquí por transparencia.
 
 Este reporte no contiene claves, tokens, cookies ni credenciales.
